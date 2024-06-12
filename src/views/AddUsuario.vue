@@ -18,7 +18,7 @@
               <div class="row">
                   <div class="col-md-12 form-group mb-3">
                     <label for="cpf" class="form-label">CPF</label>
-                    <input id="cpf" type="text"  name="cpf" class="form-control" placeholder="cpf" required v-model="usuario.cpf" >
+                    <input id="cpf" type="text"  name="cpf" class="form-control" placeholder="xxx.xxx.xxx-xx" required v-model="usuario.cpf" >
                   </div>
                 </div>
 
@@ -26,7 +26,7 @@
               <div class="row">
                   <div class="col-md-12 form-group mb-3">
                     <label for="dataNascimento" class="form-label">Data de nascimento</label>
-                    <input id="dataNascimento" type="text"  name="dataNascimento" class="form-control" placeholder="Data de nascimento" required v-model="usuario.dataNascimento" >
+                    <input id="dataNascimento" type="date"  name="dataNascimento" class="form-control" placeholder="Data de nascimento" required v-model="usuario.dataNascimento" >
                   </div>
                 </div>         
              

@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+import ProjectView from '../views/ProjectView.vue'
+import ParticipatoryBudgetingView from '../views/ParticipatoryBudgetingView.vue'
 import UsuariosView from '../views/UsuariosView.vue'
 
 const router = createRouter({
@@ -7,12 +10,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: UsuariosView
+      component: HomeView
     },
     {
-      path: '/add',
-      name: 'add',
+      path: '/projects',
+      name: 'projects',
+      component: ProjectView
+    },
+    {
+      path: '/pb',
+      name: 'pb',
+      component: ParticipatoryBudgetingView
+    },
+    {
+      path: '/userRegister',
+      name: 'userRegister',
       component: () => import('../views/AddUsuario.vue')
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: UsuariosView
     },
     {
       path: '/edit/:id',
