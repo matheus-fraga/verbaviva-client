@@ -2,6 +2,7 @@
   import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
   import Navbar from '../components/Navbar.vue'
   import ProjectList from '../components/ProjectList.vue'
+  import { NButton, useNotification, NNotificationProvider } from 'naive-ui'
 </script>
 
 <template>
@@ -10,7 +11,10 @@
     <p class="red">DEV: para peformar votos:</p>
     <p class="red">Em components/ProjectVote.vue > prepareRequest()</p>
     <p class="red">Modifique o "projetoId" e "usuarioId"</p>
-    <ProjectList/>  
+    <n-notification-provider>
+    <ProjectList/>
+    </n-notification-provider>
+
 </template>
 
 <style scoped>

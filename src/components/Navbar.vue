@@ -21,10 +21,14 @@
                   <li class="nav-item">
                   <a class="nav-link" href="/users">Usuarios (dev)</a>
                   </li>
-              </ul>
-             
+              </ul>            
               </div>
           </div>
       </nav>
   </main>
 </template>
+
+<script>
+    import { NButton, useNotification, NIcon } from 'naive-ui'
+    import { AddCircleRound } from '@vicons/material'
+</script>
