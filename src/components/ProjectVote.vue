@@ -6,11 +6,16 @@
     //apos o voto, desabilitar o botao
     //mostrar mensagem de voto
     import { ref } from 'vue';
+    import { NButton, useNotification, NIcon } from 'naive-ui'
+    import { AddCircleRound } from '@vicons/material'
 
     const props = defineProps({ projectInfo:Object })
     const emit = defineEmits(["updateVoteCount"]);
     let showVoteRequestFailError = ref(false);
     let showVoteRequestFailSuccess = ref(false);
+    let showVoteRequestFailErrorMessage = ref("");
+    let showVoteRequestFailSuccessMessage = ref("");
+    const notification = useNotification();
 
 
     function performVote(event) {
@@ -29,8 +34,8 @@
         let date = new Date().toISOString().slice(0, 10);
         //"projetoId" >> project.id assim q o DTO de projeto for ajustado
         let payload = {
-            "projetoId": 5, //tem q voltar o id no DTO, por enquanto vai ficar hardcoded em 1
-            "usuarioId": 107, //vai receber informacoes do user logado (precisamos criar um global state para pegar essa info de qualquer lugar)
+            "projetoId": 1, //tem q voltar o id no DTO, por enquanto vai ficar hardcoded em 1
+            "usuarioId": 108, //vai receber informacoes do user logado (precisamos criar um global state para pegar essa info de qualquer lugar)
             "dataCriacao" : date,
             "nome": project.nome
         }
@@ -59,14 +64,30 @@
     }
 
     function handleVoteSuccessResponse(data, payload) {
+        showVoteRequestFailSuccessMessage.value = "Voto bem-sucedido!"
         showVoteRequestFailSuccess.value = true;
+        notification.create({
+            title: "Success",
+            content: showVoteRequestFailSuccessMessage.value,
+            type: "success",
+            duration: 2e3,
+            closable: false
+        })
         updateVotedProject(data, payload);
         console.log("handleVoteSuccessResponse");
     }
 
     function handleVoteErrorResponse() {
         console.log("handleVoteErrorResponse");
+        showVoteRequestFailErrorMessage.value = "Voto falhou: causa"
         showVoteRequestFailError.value = true;
+        notification.create({
+            title: "Error",
+            content: showVoteRequestFailErrorMessage.value,
+            type: "error",
+            duration: 2e3,
+            closable: false
+        })
     }
 
     function updateVotedProject(data, payload) {
@@ -80,9 +101,15 @@
 </script>
 
 <template>
-    <button @click="performVote" :disabled="showVoteRequestFailError || showVoteRequestFailSuccess">Votar</button>
-    <p v-show="showVoteRequestFailError" class="red">error</p>
-    <p v-show="showVoteRequestFailSuccess" class="green">success</p>
+        <n-button @click="performVote" :disabled="showVoteRequestFailError || showVoteRequestFailSuccess">
+            <template #icon>
+                <n-icon>
+                    <add-circle-round />
+                </n-icon>
+            </template>
+            Votar</n-button>
+        <p v-show="showVoteRequestFailError" class="red">{{ showVoteRequestFailErrorMessage }}</p>
+        <p v-show="showVoteRequestFailSuccess" class="green">{{ showVoteRequestFailSuccessMessage }}</p>
 </template>
 
 <style scoped>

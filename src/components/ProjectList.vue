@@ -1,6 +1,8 @@
 <script setup>
   import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
   import ProjectVote from '../components/ProjectVote.vue'
+  import { NButton, NCard } from 'naive-ui'
+
 
   const emit = defineEmits(["updateProjectInfo"]);
   
@@ -61,18 +63,18 @@
 </script>
 
 <template>
-    <main>     
       <div v-show="showProjects">
-        <div class="spacer" v-for="project in projectsPayload" :key="project.nome">
+        <n-card size="small" hoverable class="spacer" v-for="project in projectsPayload" :key="project.nome">
           <h6>{{ project.nome }}</h6>
-          <p> <span>Descricao:</span> {{ project.descricao }}</p>
-          <p> <span>Criada em:</span> {{ project.dataCriacao }}</p>
-          <p> <span>Proposta por:</span> {{ project.nomeUsuario }}</p>
-          <p> <span>Votos:</span> {{ project.votoIds.length }}</p>
-          <ProjectVote :project-info="project" @update-vote-count="updateVoteCount"/>
-        </div>
+          <p><span>Descricao:</span> {{ project.descricao }}</p>
+          <p><span>Criado em:</span> {{ String(project.dataCriacao).split("-").reverse().join("/") }}</p>
+          <p><span>Proposta por:</span> {{ project.nomeUsuario }}</p>
+          <div class="h-flex">
+            <p class="votes">{{ project.votoIds.length }}</p>
+            <ProjectVote :project-info="project" @update-vote-count="updateVoteCount"/>
+          </div>
+        </n-card>
       </div>
-    </main>
 </template>
 
 <style scoped>
@@ -91,5 +93,13 @@
     }
     span {
       color: rgb(124, 124, 124);
+    }
+    .h-flex {
+      display: flex;
+      align-items: center;
+    }
+    .votes {
+      font-size: 30px;
+      margin-right: 10px;
     }
 </style>
