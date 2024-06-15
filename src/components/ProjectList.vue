@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
-import ProjectVote from '../components/ProjectVote.vue'
-import { NButton, NCard, NSpace, NSwitch, NTag } from 'naive-ui'
+import ProjectVote from '../components/ProjectVote.vue';
+import { NButton, NCard, NSpace, NSwitch, NTag } from 'naive-ui';
+import { user } from "../stateManagement/user.js";
 
 const emit = defineEmits(["updateProjectInfo"]);
 
@@ -10,6 +11,7 @@ let showProjects = ref(false);
 let showFetchError = ref(false);
 let showFilters = ref(true);
 let filters = ref([false,false,false,false]);
+let loginButton = ref(user.getUserData().isSignedIn);
 
 onBeforeMount(() => {
   console.log("onBeforeMount");
@@ -25,9 +27,10 @@ async function getProjects() {
   if (response.ok) {
     let jsonResponse = await response.json();
     projectsPayload.value = jsonResponse;
-    toggleShowProjects();
+    setShowProjectsTrue();
     console.log("success");
   } else {
+    setShowProjectsFalse()
     toggleShowFetchError();
     console.log("error");
   }
@@ -43,9 +46,21 @@ function updateVoteCount(response) {
   }
 }
 
+function emitLoginClick() {
+  console.log("emitLoginClick");
+}
+
 //helpers
-function toggleShowProjects() {
-  showProjects.value = !(showProjects.value);
+function setShowProjectsTrue() {
+  if(!showProjects.value) {
+    showProjects.value = true;
+  }
+}
+
+function setShowProjectsFalse() {
+  if(showProjects.value) {
+    showProjects.value = false;
+  }
 }
 function toggleShowFetchError() {
   showFetchError.value = !(showFetchError.value);
@@ -53,6 +68,19 @@ function toggleShowFetchError() {
 
 function toggleShowFilters(event) {
   showFilters.value = !(showFilters.value)
+}
+
+function toggleLogin() {
+  if(loginButton.value) {
+    loginButton.value = false;
+    user.signOut();
+    console.log("logout");
+  } else {
+    loginButton.value = true;
+    user.signIn();
+    console.log("login");
+  }  
+  getProjects();
 }
 
 function getProjectByNome(projectId) { //a ideia e trocar nome por id
@@ -67,6 +95,17 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
 </script>
 
 <template>
+    <n-space>
+    <n-switch @click="toggleLogin" :value="loginButton">
+      <template #checked>
+        user logged in
+      </template>
+      <template #unchecked>
+        user logged out
+      </template>
+    </n-switch>
+  </n-space>
+
   <n-space>
     <n-switch @click="toggleShowFilters" :value="showFilters" :round="false">
       <template #checked>
@@ -85,6 +124,7 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
       <n-tag v-model:checked="filters[3]" checkable value="leastRecent">Menos recentes</n-tag>
     </n-card>
   </div>
+
   <div v-show="showProjects">
     <n-card size="small" hoverable class="spacer" v-for="project in projectsPayload" :key="project.nome">
       <h6>{{ project.nome }}</h6>
@@ -93,7 +133,7 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
       <p><span>Proposta por:</span> {{ project.nomeUsuario }}</p>
       <div class="h-flex">
         <p class="votes">{{ project.votoIds.length }}</p>
-        <ProjectVote :project-info="project" @update-vote-count="updateVoteCount" />
+        <ProjectVote :project-info="project" @update-vote-count="updateVoteCount" @emit-login-click="emitLoginClick" :user-state="user.getUserData()"/>
       </div>
     </n-card>
   </div>
