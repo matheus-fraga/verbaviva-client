@@ -59,12 +59,12 @@ function isTouchScreen(){
 
       <n-card hoverable>
         <template #cover>
-          <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg">
+          <img class="carousel-img" src="/src/assets/proponha.jpg">
         </template>
         <n-divider title-placement="center">
           <h1>Proponha</h1>
         </n-divider>
-        <p>Ajude a sociedade a entender onde estão as localidades mais necessitadas. Proponha um projeto e mostre para todos o seu desejo de mudar!</p>
+        <p>Contribua ativamente para que a sociedade identifique claramente as localidades que mais necessitam de apoio. Proponha um projeto inovador e mostre a todos o seu desejo genuíno de promover mudanças significativas e positivas. Juntos, podemos construir uma comunidade mais agradável e organizada!</p>
         <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/userRegister">Registre-se agora mesmo!
           <n-icon size="20">
             <arrow-forward-round />
@@ -74,12 +74,12 @@ function isTouchScreen(){
 
       <n-card hoverable>
         <template #cover>
-          <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg">
+          <img class="carousel-img" src="/src/assets/vote.jpg">
         </template>
         <n-divider title-placement="center">
           <h1>Vote</h1>
         </n-divider>
-        <p>Exerça o seu direito e vote em projetos já propostos. Só assim é possível entender a relevância da mudança na sua comunidade!</p>
+        <p>Exerça o seu direito e participe ativamente, votando em projetos já propostos pela sua comunidade. Somente assim será possível compreender plenamente a relevância e o impacto das mudanças que podem transformar positivamente o seu entorno. Seja um agente de mudança e ajude a construir um futuro melhor para todos!</p>
         <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/projects">De uma olhada nos projetos!
           <n-icon size="20">
             <arrow-forward-round />
@@ -89,12 +89,12 @@ function isTouchScreen(){
 
       <n-card hoverable>
         <template #cover>
-          <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg">
+          <img class="carousel-img" src="/src/assets/diferenca.jpg">
         </template>
         <n-divider title-placement="center">
           <h1>Faça a diferença</h1>
         </n-divider>
-        <p>Entenda qual o nosso propósito, como funcionamos, e como você é parte fundamental nessa iniciativa. O peder de decisão está nas suas mãos! </p>
+        <p>Compreenda qual é o nosso propósito, como operamos e de que maneira você é uma parte essencial desta iniciativa. O poder de decisão e a capacidade de influenciar mudanças significativas estão em suas mãos! Participe ativamente e faça a diferença conosco!</p>
         <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/userRegister">Sobre nós
           <n-icon size="20">
             <arrow-forward-round />
