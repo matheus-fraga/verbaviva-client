@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
-import { NButton, NCard, NSpace, NSwitch, NTag } from 'naive-ui';
+import { NButton, NCard, NSpace, NSwitch, NTag, NIcon } from 'naive-ui';
 import ProjectVote from '../components/ProjectVote.vue';
+import { AddCircleRound, LogInRound, RecordVoiceOverRound, WavingHandRound, DescriptionOutlined, WbIncandescentOutlined, PersonOutlineOutlined } from '@vicons/material'
 import Login from '../components/Login.vue'
 import { user } from "../stateManagement/user.js";
 
@@ -114,7 +115,7 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
     </n-switch>
   </n-space>
 
-  <n-space>
+  <!-- <n-space>
     <n-switch @click="toggleShowFilters" :value="showFilters" :round="false">
       <template #checked>
         Mostrar filtros
@@ -123,7 +124,7 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
         Esconder filtros
       </template>
     </n-switch>
-  </n-space>
+  </n-space> -->
   <!-- <div v-show="showFilters">
     <n-card title="Filtrar por:" size="small">
       <n-tag v-model:checked="filters[0]" checkable value="mostVoted">Mais votados</n-tag>
@@ -135,15 +136,18 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
 
   <div v-show="showProjects">
     <n-card size="small" hoverable class="spacer" v-for="project in projectsPayload" :key="project.nome">
-      <h6>{{ project.nome }}</h6>
-      <p><span>Descricao:</span> {{ project.descricao }}</p>
-      <p><span>Criado em:</span> {{ String(project.dataCriacao).split("-").reverse().join("/") }}</p>
-      <p><span>Proposta por:</span> {{ project.nomeUsuario }}</p>
+      <h4> <n-icon> <record-voice-over-round /> </n-icon> {{ project.nome }}</h4>
+      <p> <n-icon> <description-outlined /> </n-icon> Descricao: {{ project.descricao }}</p>
+      <p> <n-icon> <wb-incandescent-outlined /></n-icon> <span>Criado em:</span> {{ String(project.dataCriacao).split("-").reverse().join("/") }}</p>
+      <p> <n-icon> <person-outline-outlined /></n-icon><span>Proposta por:</span> {{ project.nomeUsuario }}</p>
       <div class="h-flex">
+        <n-icon size="20"> <waving-hand-round /> </n-icon>
         <p class="votes">{{ project.votoIds.length }}</p>
         <ProjectVote :project-info="project" @update-vote-count="updateVoteCount" @emit-login-click="emitLoginClick" :user-state="user.getUserData()"/>
       </div>
+      
     </n-card>
+    
   </div>
 </template>
 
