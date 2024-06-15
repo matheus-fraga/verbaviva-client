@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
-import ProjectVote from '../components/ProjectVote.vue';
 import { NButton, NCard, NSpace, NSwitch, NTag } from 'naive-ui';
+import ProjectVote from '../components/ProjectVote.vue';
+import Login from '../components/Login.vue'
 import { user } from "../stateManagement/user.js";
 
 const emit = defineEmits(["updateProjectInfo"]);
@@ -10,8 +11,9 @@ let projectsPayload = ref({});
 let showProjects = ref(false);
 let showFetchError = ref(false);
 let showFilters = ref(true);
-let filters = ref([false,false,false,false]);
+//let filters = ref([false,false,false,false]);
 let loginButton = ref(user.getUserData().isSignedIn);
+let showLoginComponent = ref(false);
 
 onBeforeMount(() => {
   console.log("onBeforeMount");
@@ -48,6 +50,11 @@ function updateVoteCount(response) {
 
 function emitLoginClick() {
   console.log("emitLoginClick");
+  showLoginComponent.value = true;
+}
+
+function handleEmitComponentClose(){
+  showLoginComponent.value = false;
 }
 
 //helpers
@@ -95,6 +102,7 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
 </script>
 
 <template>
+    <Login v-show="!loginButton && showLoginComponent" @emit-login-component-close="handleEmitComponentClose"/>
     <n-space>
     <n-switch @click="toggleLogin" :value="loginButton">
       <template #checked>
@@ -116,14 +124,14 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
       </template>
     </n-switch>
   </n-space>
-  <div v-show="showFilters">
+  <!-- <div v-show="showFilters">
     <n-card title="Filtrar por:" size="small">
       <n-tag v-model:checked="filters[0]" checkable value="mostVoted">Mais votados</n-tag>
       <n-tag v-model:checked="filters[1]" checkable value="leastVoted">Menos votados</n-tag>
       <n-tag v-model:checked="filters[2]" checkable value="mostRecent">Mais recentes</n-tag>
       <n-tag v-model:checked="filters[3]" checkable value="leastRecent">Menos recentes</n-tag>
     </n-card>
-  </div>
+  </div> -->
 
   <div v-show="showProjects">
     <n-card size="small" hoverable class="spacer" v-for="project in projectsPayload" :key="project.nome">
