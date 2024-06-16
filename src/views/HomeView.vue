@@ -40,7 +40,7 @@ function isTouchScreen(){
     <Navbar />
     <n-space justify="center">
       <n-gradient-text :gradient="gradientColor">
-        <h1>Seja a mudanca para melhorar a sociedade</h1>
+        <h1>Seja a mudança para melhorar a sociedade</h1>
       </n-gradient-text>
     </n-space>
     <n-gradient-text :gradient="gradientColor">
@@ -59,13 +59,12 @@ function isTouchScreen(){
 
       <n-card hoverable>
         <template #cover>
-          <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg">
+          <img class="carousel-img" src="/src/assets/proponha.jpg">
         </template>
         <n-divider title-placement="center">
           <h1>Proponha</h1>
         </n-divider>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci itaque tenetur cumque ratione ut autem cum
-          minus laborum dolor a, saepe dolorum veritatis, voluptatum quos dolores accusamus, quas sapiente. Veniam!</p>
+        <p>Contribua ativamente para que a sociedade identifique claramente as localidades que mais necessitam de apoio. Proponha um projeto inovador e mostre a todos o seu desejo genuíno de promover mudanças significativas e positivas. Juntos, podemos construir uma comunidade mais agradável e organizada!</p>
         <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/userRegister">Registre-se agora mesmo!
           <n-icon size="20">
             <arrow-forward-round />
@@ -75,13 +74,12 @@ function isTouchScreen(){
 
       <n-card hoverable>
         <template #cover>
-          <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg">
+          <img class="carousel-img" src="/src/assets/vote.jpg">
         </template>
         <n-divider title-placement="center">
           <h1>Vote</h1>
         </n-divider>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci itaque tenetur cumque ratione ut autem cum
-          minus laborum dolor a, saepe dolorum veritatis, voluptatum quos dolores accusamus, quas sapiente. Veniam!</p>
+        <p>Exerça o seu direito e participe ativamente, votando em projetos já propostos pela sua comunidade. Somente assim será possível compreender plenamente a relevância e o impacto das mudanças que podem transformar positivamente o seu entorno. Seja um agente de mudança e ajude a construir um futuro melhor para todos!</p>
         <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/projects">De uma olhada nos projetos!
           <n-icon size="20">
             <arrow-forward-round />
@@ -91,14 +89,13 @@ function isTouchScreen(){
 
       <n-card hoverable>
         <template #cover>
-          <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg">
+          <img class="carousel-img" src="/src/assets/diferenca.jpg">
         </template>
         <n-divider title-placement="center">
-          <h1>Faca a diferenca</h1>
+          <h1>Faça a diferença</h1>
         </n-divider>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci itaque tenetur cumque ratione ut autem cum
-          minus laborum dolor a, saepe dolorum veritatis, voluptatum quos dolores accusamus, quas sapiente. Veniam!</p>
-        <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/userRegister">Vote!
+        <p>Compreenda qual é o nosso propósito, como operamos e de que maneira você é uma parte essencial desta iniciativa. O poder de decisão e a capacidade de influenciar mudanças significativas estão em suas mãos! Participe ativamente e faça a diferença conosco!</p>
+        <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/userRegister">Sobre nós
           <n-icon size="20">
             <arrow-forward-round />
           </n-icon>
@@ -108,10 +105,8 @@ function isTouchScreen(){
     </n-carousel>
 
     <n-gradient-text :gradient="gradientColor">
-      <h2>Seja a mudanca</h2>
-    </n-gradient-text>
-    <n-gradient-text :gradient="gradientColor">
-      <h2>Faca a mudanca chegar ate voce</h2>
+      <h1>PARTICIPE AGORA</h1>
+      <h2>Seja a mudança. Faça a mudanca chegar ate voce!</h2>
     </n-gradient-text>
   </main>
 </template>
@@ -134,6 +129,7 @@ function isTouchScreen(){
 
 .n-gradient-text {
   white-space: break-spaces;
+  text-align: right;
 }
 
 .n-divider {
