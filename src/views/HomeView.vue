@@ -95,7 +95,7 @@ function isTouchScreen(){
           <h1>Faça a diferença</h1>
         </n-divider>
         <p>Compreenda qual é o nosso propósito, como operamos e de que maneira você é uma parte essencial desta iniciativa. O poder de decisão e a capacidade de influenciar mudanças significativas estão em suas mãos! Participe ativamente e faça a diferença conosco!</p>
-        <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/userRegister">Sobre nós
+        <n-button block type="primary" color="rgb(172, 55, 55)" tag="a" href="/pb">Sobre nós
           <n-icon size="20">
             <arrow-forward-round />
           </n-icon>

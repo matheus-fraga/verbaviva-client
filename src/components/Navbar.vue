@@ -13,7 +13,7 @@
                   <a class="nav-link" href="/projects">Projetos</a>
                   </li>
                   <li class="nav-item">
-                  <a class="nav-link" href="/pb">Entenda o orcamento participativo</a>
+                  <a class="nav-link" href="/pb">Sobre nós</a>
                   </li>
                   <li class="nav-item">
                   <a class="nav-link" href="/userRegister">Participe</a>
