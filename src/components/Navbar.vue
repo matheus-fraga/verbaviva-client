@@ -19,6 +19,9 @@
                   <a class="nav-link" href="/userRegister">Participe</a>
                   </li>
                   <li class="nav-item">
+                  <a class="nav-link" href="/create_project">Criar Projeto</a>
+                  </li>
+                  <li class="nav-item">
                   <a class="nav-link" href="/users">Usuarios (dev)</a>
                   </li>
               </ul>            
