@@ -1,13 +1,9 @@
 <script setup>
-//Verificar se usuario esta logado
-//Verificar se o usuario ja votou no projeto x
-//se sim, disable no botao + mensagem de erro, caso ele mesmo assim clique
-//senao habilitar o botao
-//apos o voto, desabilitar o botao
-//mostrar mensagem de voto
+
 import { ref, onMounted, onUpdated } from 'vue';
 import { NButton, useNotification, NIcon } from 'naive-ui'
 import { AddCircleRound, LogInRound } from '@vicons/material'
+import { user } from '../stateManagement/user';
 
 const props = defineProps({ projectInfo: Object, userState: Object })
 const emit = defineEmits(["updateVoteCount", "emitLoginClick"]);
@@ -15,6 +11,37 @@ let showVoteRequestFailError = ref(false);
 let showVoteRequestFailSuccess = ref(false);
 let showVoteRequestFailErrorMessage = ref("");
 let showVoteRequestFailSuccessMessage = ref("");
+
+let userVoted = ref(false);
+
+onMounted(( ) => {
+    checkIfUserVoted();
+    //console.log(userVoted.value)
+});
+
+// function checkIfUserVoted() {
+
+//     const projects = getProjectInfo()
+//     console.log(projects.votoIds.{}.usuarioId)
+//     const votedProjects = projects.votoIds || [];
+//     userVoted.value = user.getUserData().data.id == votedProjects.includes(projects.votoIds.usuarioId);
+// }
+
+function checkIfUserVoted() {
+    
+    const userId = user.getUserData().data.id;
+    const votedProjects = props.projectInfo.votoIds || [];
+
+    for (const voto of votedProjects) {
+        if (voto.usuarioId === userId) {
+            userVoted.value = true;
+            console.log("Voto encontrado:", voto);
+            break;
+        }
+    }
+}
+
+
 const notification = useNotification();
 
 
@@ -32,10 +59,9 @@ function prepareRequest() {
     //getUserInfo();
     let project = getProjectInfo();
     let date = new Date().toISOString().slice(0, 10);
-    //"projetoId" >> project.id assim q o DTO de projeto for ajustado
     let payload = {
-        "projetoId": 1, //tem q voltar o id no DTO, por enquanto vai ficar hardcoded em 1
-        "usuarioId": 108, //vai receber informacoes do user logado (precisamos criar um global state para pegar essa info de qualquer lugar)
+        "projetoId": project.id, 
+        "usuarioId": user.getUserData().data.id, // recebe informacoes do user logado 
         "dataCriacao": date,
         "nome": project.nome
     }
@@ -105,7 +131,7 @@ function emitLoginClick() {
 </script>
 
 <template>
-    <n-button v-show="(props.userState.isSignedIn)" @click="performVote" :disabled="showVoteRequestFailError || showVoteRequestFailSuccess">
+    <n-button v-show="(props.userState.isSignedIn)" @click="performVote" :disabled="showVoteRequestFailError || showVoteRequestFailSuccess || userVoted">
         <template #icon>
             <n-icon>
                 <add-circle-round />

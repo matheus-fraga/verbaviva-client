@@ -85,7 +85,7 @@ function toggleLogin() {
     console.log("logout");
   } else {
     loginButton.value = true;
-    user.signIn();
+   // user.signIn();
     console.log("login");
   }  
   getProjects();
@@ -102,8 +102,8 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
 
 </script>
 
-<template>
-    <Login v-show="!loginButton && showLoginComponent" @emit-login-component-close="handleEmitComponentClose"/>
+<template>  
+    <Login v-show="!loginButton && showLoginComponent" @emit-login-component-close="handleEmitComponentClose" @update-login-info="toggleLogin"/>
     <n-space>
     <n-switch @click="toggleLogin" :value="loginButton">
       <template #checked>

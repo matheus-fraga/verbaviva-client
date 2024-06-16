@@ -4,9 +4,9 @@ export const user = reactive({
     isSignedIn: false,
     data: {},
     
-    signIn() {
+    signIn(obj) {
         this.isSignedIn = true;
-        this.data = {userName: "test", id: 123};
+        this.data = {userName: obj.nome, id: obj.usuarioId};
     },
     signOut() {
         this.isSignedIn = false;
