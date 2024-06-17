@@ -14,7 +14,7 @@ let showFetchError = ref(false);
 let showFilters = ref(true);
 //let filters = ref([false,false,false,false]);
 let loginButton = ref(user.getUserData().isSignedIn);
-let showLoginComponent = ref(false);
+let showLoginComponent = ref(true);
 
 onBeforeMount(() => {
   console.log("onBeforeMount");
@@ -55,7 +55,8 @@ function emitLoginClick() {
 }
 
 function handleEmitComponentClose(){
-  showLoginComponent.value = false;
+  //showLoginComponent.value = false;
+  
 }
 
 //helpers
@@ -81,7 +82,7 @@ function toggleShowFilters(event) {
 function toggleLogin() {
   if(loginButton.value) {
     loginButton.value = false;
-    user.signOut();
+    //user.signOut();
     console.log("logout");
   } else {
     loginButton.value = true;
@@ -103,16 +104,16 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
 </script>
 
 <template>  
-    <Login v-show="!loginButton && showLoginComponent" @emit-login-component-close="handleEmitComponentClose" @update-login-info="toggleLogin"/>
+    <Login v-show="showLoginComponent" @emit-login-component-close="handleEmitComponentClose" @update-login-info="toggleLogin"/>
     <n-space>
-    <n-switch @click="toggleLogin" :value="loginButton">
+    <!-- <n-switch @click="toggleLogin" :value="loginButton">
       <template #checked>
         user logged in
       </template>
       <template #unchecked>
         user logged out
       </template>
-    </n-switch>
+    </n-switch> -->
   </n-space>
 
   <!-- <n-space>

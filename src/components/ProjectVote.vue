@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref, onMounted, onUpdated } from 'vue';
+import { ref, onMounted, onUpdated, onBeforeUpdate } from 'vue';
 import { NButton, useNotification, NIcon } from 'naive-ui'
 import { AddCircleRound, LogInRound } from '@vicons/material'
 import { user } from '../stateManagement/user';
@@ -16,16 +16,13 @@ let userVoted = ref(false);
 
 onMounted(( ) => {
     checkIfUserVoted();
-    //console.log(userVoted.value)
 });
 
-// function checkIfUserVoted() {
+onBeforeUpdate(() => {
+    checkIfUserVoted();
+    
+})
 
-//     const projects = getProjectInfo()
-//     console.log(projects.votoIds.{}.usuarioId)
-//     const votedProjects = projects.votoIds || [];
-//     userVoted.value = user.getUserData().data.id == votedProjects.includes(projects.votoIds.usuarioId);
-// }
 
 function checkIfUserVoted() {
     
@@ -35,7 +32,6 @@ function checkIfUserVoted() {
     for (const voto of votedProjects) {
         if (voto.usuarioId === userId) {
             userVoted.value = true;
-            console.log("Voto encontrado:", voto);
             break;
         }
     }
@@ -58,6 +54,7 @@ function prepareRequest() {
     console.log("prepareRequest");
     //getUserInfo();
     let project = getProjectInfo();
+    console.log("prepare aqui", project)
     let date = new Date().toISOString().slice(0, 10);
     let payload = {
         "projetoId": project.id, 
