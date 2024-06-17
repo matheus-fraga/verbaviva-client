@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
-import Navbar from '../components/Navbar.vue'
+import NeoNavBar from '../components/NeoNavBar.vue'
 import { NCarousel, NGradientText, NCard, NButton, NDivider, NIcon, NTag, NSpace } from 'naive-ui'
 import { ArrowForwardRound, SwipeFilled } from '@vicons/material'
 
@@ -37,7 +37,7 @@ function isTouchScreen(){
 </script>
 <template>
   <main>
-    <Navbar />
+    <NeoNavBar />
     <n-space justify="center">
       <n-gradient-text :gradient="gradientColor">
         <h1>Seja a mudança para melhorar a sociedade</h1>

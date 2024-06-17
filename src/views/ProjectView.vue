@@ -1,16 +1,14 @@
 <script setup>
   import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
   import Navbar from '../components/Navbar.vue'
+  import NeoNavBar from '../components/NeoNavBar.vue'
   import ProjectList from '../components/ProjectList.vue'
   import { NButton, useNotification, NNotificationProvider } from 'naive-ui'
 </script>
 
 <template>
-    <Navbar/>
-    <p>this is the project view page</p>
-    <p class="red">DEV: para peformar votos:</p>
-    <p class="red">Em components/ProjectVote.vue > prepareRequest()</p>
-    <p class="red">Modifique o "projetoId" e "usuarioId"</p>
+    <NeoNavBar />
+    <p class="red">para que o botao criar projeto apareca, faca o login e atualize a pagina (por enquanto)</p>
     <n-notification-provider>
     <ProjectList/>
     </n-notification-provider>
