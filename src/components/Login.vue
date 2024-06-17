@@ -8,6 +8,8 @@ const emit = defineEmits(["emitLoginComponentClose", "updateLoginInfo"]);
 
 let dividerTextPlacement = ref("center");
 
+let showLogoutButton = ref(user.getUserData().isSignedIn);
+let showLoginButton = ref(!showLogoutButton.value);''
 const cpf = ref('');
 const dataNascimento = ref(null);
 
@@ -55,6 +57,8 @@ function fazLogin() {
         if (data.authenticated) {
             console.log("usuário localizado");
             user.signIn(data);
+            showLogoutButton.value = true;
+            showLoginButton.value = false;
             emit('updateLoginInfo') 
         } else {
             console.log("usuário não localizado");
@@ -63,6 +67,13 @@ function fazLogin() {
     .catch(error => {
         console.log("Erro na autenticação: ", error);
     });
+}
+
+ function fazLogout(){
+  user.signOut();
+  showLoginButton.value = true;
+  showLogoutButton.value = false;
+  emit('updateLoginInfo');
 }
 
 function timestampToDate(timestamp) {
@@ -88,7 +99,10 @@ function timestampToDate(timestamp) {
         <n-space vertical>
           <n-input v-model:value="cpf" size="tiny" placeholder="CPF" />
           <n-date-picker v-model:value="dataNascimento" size="tiny" type="date" />
-          <n-button size="tiny" type="primary" @click="fazLogin">Login</n-button>
+          <n-space>
+            <n-button v-show="showLoginButton" size="tiny" type="primary" @click="fazLogin">Login</n-button>
+            <n-button v-show="showLogoutButton" size="tiny" type="secondary" @click="fazLogout">Logout</n-button>
+          </n-space>
         </n-space>
       </n-card>
     </div>
