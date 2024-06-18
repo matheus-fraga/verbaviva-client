@@ -1,10 +1,10 @@
 <script setup>
-    import Navbar from '../components/Navbar.vue'
+    import NeoNavBar from '../components/NeoNavBar.vue'
 </script>
 
 <template>
   <main>
-    <Navbar/>
+    <NeoNavBar/>
     <div class="container my-5">
     <div class="jumbotron text-center">
       <h1 class="display-4">Verba Viva!</h1>
