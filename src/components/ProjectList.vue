@@ -54,20 +54,20 @@ function emitLoginClick() {
   showLoginComponent.value = true;
 }
 
-function handleEmitComponentClose(){
+function handleEmitComponentClose() {
   //showLoginComponent.value = false;
-  
+
 }
 
 //helpers
 function setShowProjectsTrue() {
-  if(!showProjects.value) {
+  if (!showProjects.value) {
     showProjects.value = true;
   }
 }
 
 function setShowProjectsFalse() {
-  if(showProjects.value) {
+  if (showProjects.value) {
     showProjects.value = false;
   }
 }
@@ -80,15 +80,15 @@ function toggleShowFilters(event) {
 }
 
 function toggleLogin() {
-  if(loginButton.value) {
+  if (loginButton.value) {
     loginButton.value = false;
     //user.signOut();
     console.log("logout");
   } else {
     loginButton.value = true;
-   // user.signIn();
+    // user.signIn();
     console.log("login");
-  }  
+  }
   getProjects();
 }
 
@@ -104,18 +104,6 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
 </script>
 
 <template>
-    <Login v-show="showLoginComponent" @emit-login-component-close="handleEmitComponentClose" @update-login-info="toggleLogin"/>
-    <n-space>
-    <!-- <n-switch @click="toggleLogin" :value="loginButton">
-      <template #checked>
-        user logged in
-      </template>
-      <template #unchecked>
-        user logged out
-      </template>
-    </n-switch> -->
-  </n-space>
-
   <!-- <n-space>
     <n-switch @click="toggleShowFilters" :value="showFilters" :round="false">
       <template #checked>
@@ -139,16 +127,18 @@ function getProjectByNome(projectId) { //a ideia e trocar nome por id
     <n-card size="small" hoverable class="spacer" v-for="project in projectsPayload" :key="project.nome">
       <h4> <n-icon> <record-voice-over-round /> </n-icon> {{ project.nome }}</h4>
       <p> <n-icon> <description-outlined /> </n-icon> Descricao: {{ project.descricao }}</p>
-      <p> <n-icon> <wb-incandescent-outlined /></n-icon> <span>Criado em:</span> {{ String(project.dataCriacao).split("-").reverse().join("/") }}</p>
+      <p> <n-icon> <wb-incandescent-outlined /></n-icon> <span>Criado em:</span> {{
+        String(project.dataCriacao).split("-").reverse().join("/") }}</p>
       <p> <n-icon> <person-outline-outlined /></n-icon><span>Proposta por:</span> {{ project.nomeUsuario }}</p>
       <div class="h-flex">
         <n-icon size="20"> <waving-hand-round /> </n-icon>
         <p class="votes">{{ project.votoIds.length }}</p>
-        <ProjectVote :project-info="project" @update-vote-count="updateVoteCount" @emit-login-click="emitLoginClick" :user-state="user.getUserData()"/>
+        <ProjectVote :project-info="project" @update-vote-count="updateVoteCount" @emit-login-click="emitLoginClick"
+          :user-state="user.getUserData()" />
       </div>
-      
+
     </n-card>
-    
+
   </div>
 </template>
 
