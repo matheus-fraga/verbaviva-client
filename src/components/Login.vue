@@ -3,7 +3,7 @@ import { NButton, NCard, NSpace, NSwitch, NTag, NInput, NDatePicker, NDivider } 
 import { onMounted, ref } from 'vue';
 import { user } from "../stateManagement/user.js";
 const emit = defineEmits(["emitLoginComponentClose", "updateLoginInfo"]);
-
+import eventBus from '../eventHandler/eventBus.js';
 
 
 let dividerTextPlacement = ref("center");
@@ -12,6 +12,11 @@ let showLogoutButton = ref(user.getUserData().isSignedIn);
 let showLoginButton = ref(!showLogoutButton.value);''
 const cpf = ref('');
 const dataNascimento = ref(null);
+
+eventBus.on('update-login-info-global-event', e => handleUpdateLoginInfoGlobalEvent(e))
+function emitUserStateGlobalEvent(userPublicInfoPayload) {
+  eventBus.emit('update-login-info-global-event', { data: userPublicInfoPayload });
+}
 
 onMounted (()=>{
     setStuffBasedOnScreenSize();
@@ -59,7 +64,8 @@ function fazLogin() {
             user.signIn(data);
             showLogoutButton.value = true;
             showLoginButton.value = false;
-            emit('updateLoginInfo') 
+            emit('updateLoginInfo')
+            emitUserStateGlobalEvent(data);
         } else {
             console.log("usuário não localizado");
         }
@@ -74,6 +80,16 @@ function fazLogin() {
   showLoginButton.value = true;
   showLogoutButton.value = false;
   emit('updateLoginInfo');
+  emitUserStateGlobalEvent({})
+}
+
+function handleUpdateLoginInfoGlobalEvent(userData) {
+    if(Object.keys(userData.data).length === 0) {
+        showLoginButton.value = true;
+        return;
+    }
+    // console.log(userData);
+    showLoginButton.value = false;
 }
 
 function timestampToDate(timestamp) {
