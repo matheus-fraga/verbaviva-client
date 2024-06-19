@@ -95,11 +95,118 @@ export default {
         estado: '',
         // coordenadaX: '',
         // coordenadaY: ''
-      }
+      },
+      errorMessage:'',
+      error:false
+      
     }
   },
   methods: {
+
+    validateNome() {
+      if (this.projeto.nome.length <= 1) {
+        this.errorMessage = 'O nome do projeto deve ter mais de uma letra.';
+        this.error = true 
+      } else if (!/^[a-zA-Z\s]+$/.test(this.projeto.nome)) {
+        this.errorMessage = 'O nome do projeto deve conter apenas letras.';
+        this.error = true 
+      } else {
+        this.errorMessage = '';
+
+      }
+    },
+    validateDescricao() {
+      if (this.projeto.descricao.length <= 10) {
+        this.errorMessage  = 'A descrição do projeto deve ter mais de 10 caracteres.';
+        this.error = true 
+      } else {
+        this.errorMessage  = '';
+      }
+    },
+    validateDataCriacao() {
+      const currentDate = new Date().toISOString().split('T')[0];
+      if (this.projeto.dataCriacao < currentDate) {
+        this.errorMessage  = 'A data de criação deve ser a partir de hoje.';
+        this.error = true 
+      } else {
+        this.errorMessage  = '';
+      }
+    },
+    validateRua() {
+      if (this.endereco.rua.length <= 1) {
+        this.errorMessage  = 'A rua deve ter mais de uma letra.';
+        this.error = true 
+      } else {
+        this.errorMessage  = '';
+      }
+    },
+    validateCep() {
+      if (!/^\d{5}-\d{3}$/.test(this.endereco.cep)) {
+        this.errorMessage  = 'O CEP deve estar no formato 00000-000.';
+        this.error = true 
+      } else {
+        this.errorMessage  = '';
+      }
+    },
+    validateBairro() {
+      if (this.endereco.bairro.length <= 1) {
+        this.errorMessage  = 'O bairro deve ter mais de uma letra.';
+        this.error = true 
+      } else {
+        this.errorMessage  = '';
+      }
+    },
+    validateMunicipio() {
+      if (this.endereco.municipio.length <= 1) {
+        this.errorMessage  = 'O município deve ter mais de uma letra.';
+        this.error = true 
+      } else {
+        this.errorMessage  = '';
+      }
+    },
+    validateEstado() {
+      if (this.endereco.estado.length <= 1) {
+        this.errorMessage  = 'O estado deve ter mais de uma letra.';
+        this.error = true 
+      } else {
+        this.errorMessage  = '';
+      }
+    },
+    validateForm() {
+      const validators = [
+        this.validateNome,
+        this.validateDescricao,
+        this.validateDataCriacao,
+        this.validateRua,
+        this.validateCep,
+        this.validateBairro,
+        this.validateMunicipio,
+        this.validateEstado
+      ];
+
+
+
+      // Executa cada função de validação
+      validators.forEach((validator) => {
+          if (!this.error)
+            validator()
+          }); 
+
+      if (
+        !this.error
+      ) {
+        alert('Formulário válido!');
+        return true 
+      } else {
+        alert(this.errorMessage );
+        return false
+      }
+    },
     createProjeto() {
+      if(!this.validateForm()){
+        this.error = false
+        return
+      }
       // Primeiro, criar o endereço
       fetch('http://localhost:8080/enderecos', {
         method: 'POST',
@@ -132,7 +239,10 @@ export default {
       });
     }
   }
-}
+
+} 
+  
+
 </script>
 
 <style scoped>
