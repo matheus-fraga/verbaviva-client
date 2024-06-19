@@ -4,6 +4,7 @@ import { ref, onMounted, onUpdated, onBeforeUpdate } from 'vue';
 import { NButton, useNotification, NIcon } from 'naive-ui'
 import { AddCircleRound, LogInRound } from '@vicons/material'
 import { user } from '../stateManagement/user';
+import  eventBus from '../eventHandler/eventBus.js'
 
 const props = defineProps({ projectInfo: Object, userState: Object })
 const emit = defineEmits(["updateVoteCount", "emitLoginClick"]);
@@ -11,22 +12,42 @@ let showVoteRequestFailError = ref(false);
 let showVoteRequestFailSuccess = ref(false);
 let showVoteRequestFailErrorMessage = ref("");
 let showVoteRequestFailSuccessMessage = ref("");
-
 let userVoted = ref(false);
+let isSignedIn = ref(props.userState.isSignedIn);
+
+eventBus.on('update-login-info-global-event', e => handleUpdateLoginInfoGlobalEvent(e))
+
 
 onMounted(( ) => {
-    checkIfUserVoted();
+    checkIfUserVoted(props.userState.data.id);
 });
 
 onBeforeUpdate(() => {
-    checkIfUserVoted();
-    
+    checkIfUserVoted(props.userState.data.id);
 })
 
 
-function checkIfUserVoted() {
-    
-    const userId = user.getUserData().data.id;
+
+function handleUpdateLoginInfoGlobalEvent(userData) {
+    console.log("handleUpdateLoginInfoGlobalEvent");
+    if (Object.keys(userData.data).length === 0) { //user logged out
+        console.log("logout");
+        isSignedIn.value = false;
+        return;
+    }
+
+    console.log("######", userData);
+    console.log("login");
+    isSignedIn.value = true;
+
+    const userId = userData.data.usuarioId;
+    checkIfUserVoted(userId);
+
+}
+
+ function checkIfUserVoted(userId) {
+
+    console.log(userId)
     const votedProjects = props.projectInfo.votoIds || [];
 
     for (const voto of votedProjects) {
@@ -128,14 +149,14 @@ function emitLoginClick() {
 </script>
 
 <template>
-    <n-button v-show="(props.userState.isSignedIn)" @click="performVote" :disabled="showVoteRequestFailError || showVoteRequestFailSuccess || userVoted">
+    <n-button v-show="isSignedIn" @update-login-info-global-event="checkIfUserVoted" @click="performVote" :disabled="showVoteRequestFailError || showVoteRequestFailSuccess || userVoted">
         <template #icon>
             <n-icon>
                 <add-circle-round />
             </n-icon>
         </template>
         Votar</n-button>
-        <n-button v-show="!(props.userState.isSignedIn)" @click="emitLoginClick" strong secondary type="info">
+        <n-button v-show="!isSignedIn" @update-login-info-global-event="checkIfUserVoted" @click="emitLoginClick" strong secondary type="info">
         <template #icon>
             <n-icon>
                 <log-in-round />

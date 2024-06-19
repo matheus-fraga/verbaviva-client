@@ -1,6 +1,46 @@
+<script>
+import Navbar from '../components/Navbar.vue';
+import NeoNavBar from '../components/NeoNavBar.vue';
+
+
+  export default {
+      name: 'AddUsuario',
+      components: {
+        NeoNavBar
+      },
+
+      data() {
+          return {
+              usuario : {
+                  nome: '',
+                  cpf: '',
+                  dataNascimento: ''
+              }
+          }
+      },
+
+      methods: {
+          adicionarUsuario(){
+              fetch('http://localhost:8080/usuarios', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(this.usuario)
+              })
+              .then(data => {
+                  console.log(data)
+                  this.$router.push("/");
+              })
+
+          }
+      },
+          
+  }
+</script>
 <template>
   <main>
-      <Navbar />
+      <NeoNavBar/>
       <div class="my-5">
           <div class="mx-auto w-25 " style="max-width:100%;">
             <h2 class="text-center mb-3">Adicionar Usuário</h2>
@@ -45,45 +85,3 @@
         </div>
   </main>
 </template>
-
-
-<script>
-import Navbar from '../components/Navbar.vue';
-
-  export default {
-      name: 'AddUsuario',
-      components: {
-          Navbar
-      },
-
-      data() {
-          return {
-              usuario : {
-                  nome: '',
-                  cpf: '',
-                  dataNascimento: ''
-              }
-          }
-      },
-
-      methods: {
-          adicionarUsuario(){
-              fetch('http://localhost:8080/usuarios', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(this.usuario)
-              })
-              .then(data => {
-                  console.log(data)
-                  this.$router.push("/");
-              })
-
-          }
-      },
-          
-  }
-
-
-</script>

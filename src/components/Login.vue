@@ -34,9 +34,7 @@ function emitLoginComponentClose() {
   emit("emitLoginComponentClose")
 }
 
-function fazLogin() {
-  console.log(cpf.value)
-  console.log(dataNascimento.value)
+function performLogin() {
 
   if (!cpf.value || !dataNascimento.value) {
     console.log("CPF e data de nascimento são obrigatórios");
@@ -111,7 +109,7 @@ function timestampToDate(timestamp) {
         <n-input v-model:value="cpf" size="tiny" placeholder="CPF" />
         <n-date-picker v-model:value="dataNascimento" size="tiny" type="date" />
         <n-space>
-          <n-button v-show="showLoginButton" size="tiny" type="primary" @click="fazLogin">Login</n-button>
+          <n-button v-show="showLoginButton" size="tiny" type="primary" @click="performLogin">Login</n-button>
           <n-button v-show="showLogoutButton" size="tiny" type="secondary" @click="fazLogout">Logout</n-button>
         </n-space>
       </n-space>
