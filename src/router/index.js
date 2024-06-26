@@ -4,6 +4,7 @@ import ProjectView from '../views/ProjectView.vue'
 import ParticipatoryBudgetingView from '../views/ParticipatoryBudgetingView.vue'
 import UsuariosView from '../views/UsuariosView.vue'
 import CriarProjetoView from '../views/CriarProjetoView.vue'
+import UserRegister from '../views/UserRegister.vue'
 import AdminView from '../views/AdminView.vue'
 
 const router = createRouter({
@@ -25,9 +26,9 @@ const router = createRouter({
       component: ParticipatoryBudgetingView
     },
     {
-      path: '/userRegister',
-      name: 'userRegister',
-      component: () => import('../views/AddUsuario.vue')
+      path: '/user-register',
+      name: 'UserRegister',
+      component: UserRegister
     },
     {
       path: '/users',
