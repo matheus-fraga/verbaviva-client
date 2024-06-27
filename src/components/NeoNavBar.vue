@@ -78,7 +78,7 @@ function handleUpdateLoginInfoGlobalEvent(userData) {
                     <n-button text tag="a" href="/">
                         <h3>Verba Viva</h3>
                     </n-button>
-                    <n-button secondary type="success" tag="a" href="/userRegister">Participe</n-button>
+                    <n-button secondary type="success" tag="a" href="/user-register">Participe</n-button>
                     <n-button text tag="a" href="/projects">Projetos</n-button>
                     <n-button v-if="isUsersignedIn" text tag="a" href="/create_project">Criar projeto</n-button>
                 </n-space>

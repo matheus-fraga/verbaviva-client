@@ -1,4 +1,5 @@
 <template>
+  <n-message-provider>
   <div id="app">
     <n-dialog-provider>
       <n-notification-provider>
@@ -8,6 +9,7 @@
       </n-notification-provider>
     </n-dialog-provider>
   </div>
+</n-message-provider>
 </template>
 
 <script setup>
