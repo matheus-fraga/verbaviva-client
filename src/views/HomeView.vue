@@ -39,14 +39,17 @@ function isTouchScreen(){
   <main>
     <NeoNavBar />
     <n-space justify="center">
-      <n-gradient-text :gradient="gradientColor">
-        <h1>Seja a mudança para melhorar a sociedade</h1>
-      </n-gradient-text>
-    </n-space>
-    <n-gradient-text :gradient="gradientColor">
-      <h2>Exerca seu direito e escolha quais propostas devem ser priorizadas</h2>
+  <n-gradient-text :gradient="gradientColor">
+    <h1>Seja a mudança para melhorar a sociedade</h1>
+  </n-gradient-text>
+  <n-space justify="space-evenly" Align="center">
+    <n-gradient-text :gradient="gradientColor" style="text-align: center;">
+      <h3>Com nosso app, você participa diretamente do Orçamento Participativo, decidindo como investir os recursos públicos em projetos que transformam sua comunidade. Proponha e vote em obras que fazem a diferença. Seu bairro, suas decisões!</h3>
+      <br>
     </n-gradient-text>
-
+  </n-space>
+</n-space>
+      
     <n-space v-show="isMobile" justify="center">
       <n-tag size="large" type="info" >Deslize para visualizar!
         <n-icon size="20">
@@ -101,13 +104,7 @@ function isTouchScreen(){
           </n-icon>
         </n-button>
       </n-card>
-
     </n-carousel>
-
-    <n-gradient-text :gradient="gradientColor">
-      <h1>PARTICIPE AGORA</h1>
-      <h2>Seja a mudança. Faça a mudanca chegar ate voce!</h2>
-    </n-gradient-text>
   </main>
 </template>
 
